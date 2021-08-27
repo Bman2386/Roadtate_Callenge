@@ -1,5 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
+import cc from './images/cc.jpg';
+import ss from './images/ss.jpg';
+import st from './images/st.jpg';
+import vf from './images/vf.jpg';
+import pt from './images/pt.jpg';
+import mb from './images/mb.jpg';
+import ps from './images/ps.jpg';
+import os from './images/os.jpg';
+import vsr from './images/vsr.jpg';
+import sr from './images/sr.jpg';
 
 function App() {
   const [menu1, setMenu1] = useState('');
@@ -60,12 +70,11 @@ function App() {
         }
       })
    return (
-     <div>
+    
        <form>
-         <p>Main Course</p>
+         <h2>Main Course</h2>
          {menu}
        </form>
-     </div>
    ) 
   }
 
@@ -93,40 +102,107 @@ function App() {
       }
     })
     return (
-      <div>
+    
         <form>
-          <p>Side</p>
+         <h2>Side</h2>
           {menu}
         </form>
-      </div>
+    
     )
+  }
+
+  const foodImage = () => {
+    switch (menu2) {
+      case '201':
+        return (
+          <img src={cc} alt='cashew-chicken' className='img' />
+        )
+      case '202':
+        return (
+          <img src={ss} alt='sweet-and-sour-pork' className='img' />
+        )
+      case '203':
+        return (
+          <img src={st} alt='sweet-and-sour-pork' className='img' />
+        )
+      case '204':
+        return (
+          <img src={vf} alt='sweet-and-sour-pork' className='img' />
+        )
+      case '205':
+        return (
+          <img src={pt} alt='sweet-and-sour-pork' className='img' />
+        )
+      case '206':
+        return (
+          <img src={mb} alt='sweet-and-sour-pork' className='img' />
+        )
+      default:
+        return (
+          <div>
+          </div>
+        )
+    }
+  }
+
+  const side = () => {
+    switch(menu3){
+      case '301':
+        return (
+          <img src={ps} alt='sweet-and-sour-pork' className='img2' />
+        )
+      case '302':
+        return (
+          <img src={os} alt='sweet-and-sour-pork' className='img2' />
+        )
+      case '303':
+        return (
+          <img src={vsr} alt='sweet-and-sour-pork' className='img2' />
+        )
+      case '304':
+        return (
+          <img src={sr} alt='sweet-and-sour-pork' className='img2' />
+        )
+      default:
+        return (
+          <div>
+          </div>
+        )
+    }
   }
   return (
     <div className="App">
+      {foodImage()}
+      {side()}
       <h1>Menu</h1>
-      <p>Please select 1 of the following</p>
       <form>
-        <input
+        <div>
+           <input
           type="radio"
           value={101}
           onChange={handleMenu1}
           checked={menu1 === '101'}>
         </input>
         <label>Vegetarian</label>
-        <input
+        </div>
+       <div>
+         <input
           type="radio"
           value={102}
           onChange={handleMenu1}
           checked={menu1 === '102'}>
         </input>
         <label>Nut Allergy</label>
-        <input
+       </div>
+        <div>
+           <input
           type="radio"
           value={103}
           onChange={handleMenu1}
           checked={menu1 === '103'}>
         </input>
         <label>Halal</label>
+        </div>
       </form>
       {menu1 ? secondRadio() : ''}
       {menu2 ? thirdRadio() : ''}
