@@ -1,39 +1,28 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { Route, Redirect, withRouter } from 'react-router-dom';
+import { Redirect, Route, withRouter } from 'react-router-dom';
 
-// Passed in from parent component or from mapStateToProps
-const Auth = ({ component: Component, path, loggedIn, exact }) => (
-    <Route path={path} exact={exact} render={(props) => (
-        !loggedIn ? (
-            <Component {...props} />
-        ) : (
-            // Redirect to the trails page if the user is authenticated
-            <Redirect to="/dashboard" />
-        )
-    )} />
-);
+const mSTP = state => ({
+    loggedIn: Boolean(state.session.currentUser),
+});
 
-const Protected = ({ component: Component, loggedIn, ...rest }) => (
+const Auth = ({ component: Component, path, loggedIn }) => (
     <Route
-        {...rest}
-        render={props =>
-            loggedIn ? (
-                <Component {...props} />
-            ) : (
-                // Redirect to the login page if the user is already authenticated
-                <Redirect to="/" />
-            )
-        }
+        path={path}
+        render={props => (
+            loggedIn ? <Redirect to="/" /> : <Component {...props} />
+        )}
     />
 );
 
-// Use the isAuthenitcated slice of state to determine whether a user is logged in
-
-const mapStateToProps = state => (
-    { loggedIn: state.session.isAuthenticated }
+const Protected = ({ component: Component, path, loggedIn }) => (
+    <Route
+        path={path}
+        render={props => (
+            loggedIn ? <Component {...props} /> : <Redirect to="/intermediary" />
+        )}
+    />
 );
 
-export const AuthRoute = withRouter(connect(mapStateToProps)(Auth));
-
-export const ProtectedRoute = withRouter(connect(mapStateToProps)(Protected));
+export const AuthRoute = withRouter(connect(mSTP)(Auth));
+export const ProtectedRoute = withRouter(connect(mSTP, undefined)(Protected));
