@@ -26,7 +26,7 @@ form {
   position: relative;
 }
 
-input :hover {
+input:hover {
   background-color: teal;
   cursor: pointer;
 }
@@ -66,3 +66,29 @@ label {
   box-shadow: 10px 10px 5px rgb(99, 99, 4);
 }
 
+.reset {
+  border-radius: .2rem;
+  margin: 1rem;
+  background-color: tomato;
+  color: white;
+  text-shadow: 2px 2px 4px #000000;
+  padding: .5rem;
+}
+
+.reset:hover {
+  background-color: yellow;
+  cursor: pointer;
+}
+
+.submit:hover {
+  background-color: rgb(53, 236, 123);
+  cursor: pointer;
+}
+.submit {
+   border-radius: .2rem;
+  margin: .5rem;
+  background-color: green;
+  color: white;
+  text-shadow: 2px 2px 4px #000000;
+  padding: .5rem;
+}

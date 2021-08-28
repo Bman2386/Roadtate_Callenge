@@ -170,6 +170,22 @@ function App() {
         )
     }
   }
+
+  const wipe = () => {
+    setMenu1('');
+    setMenu2('');
+    setMenu3('');
+  }
+
+  const handleSubmit = () => {
+    const order = {
+      type: menu1,
+      maincourse: menu2,
+      sideDish: menu3
+    }
+
+  }
+
   return (
     <div className="App">
       {foodImage()}
@@ -206,6 +222,8 @@ function App() {
       </form>
       {menu1 ? secondRadio() : ''}
       {menu2 ? thirdRadio() : ''}
+      <button onClick={wipe} className='reset'>Reset</button>
+      {menu1 && menu2 && menu3 ? <button onClick={handleSubmit} className='submit'>Submit</button> : ''}
     </div>
   );
 }
